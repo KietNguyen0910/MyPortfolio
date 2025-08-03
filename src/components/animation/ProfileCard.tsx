@@ -29,8 +29,7 @@ const adjust = (
   fromMax: number,
   toMin: number,
   toMax: number
-) =>
-  round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
+) => round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
 
 const easeInOutCubic = (x: number) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -53,7 +52,7 @@ const ProfileCardComponent = ({
   contactText = "Contact",
   showUserInfo = true,
   onContactClick,
-} ) => {
+}) => {
   const wrapRef = useRef(null);
   const cardRef = useRef(null);
 
@@ -65,8 +64,8 @@ const ProfileCardComponent = ({
     const updateCardTransform = (
       offsetX: number,
       offsetY: number,
-      card: { clientWidth: any; clientHeight: any; },
-      wrap: { style: { setProperty: (arg0: string, arg1: string) => void; }; }
+      card: { clientWidth: any; clientHeight: any },
+      wrap: { style: { setProperty: (arg0: string, arg1: string) => void } }
     ) => {
       const width = card.clientWidth;
       const height = card.clientHeight;
@@ -82,7 +81,11 @@ const ProfileCardComponent = ({
         "--pointer-y": `${percentY}%`,
         "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
         "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+        "--pointer-from-center": `${clamp(
+          Math.hypot(percentY - 50, percentX - 50) / 50,
+          0,
+          1
+        )}`,
         "--pointer-from-top": `${percentY / 100}`,
         "--pointer-from-left": `${percentX / 100}`,
         "--rotate-x": `${round(-(centerX / 5))}deg`,
@@ -99,7 +102,7 @@ const ProfileCardComponent = ({
       startX: any,
       startY: any,
       card: any,
-      wrap: { clientWidth: number; clientHeight: number; }
+      wrap: { clientWidth: number; clientHeight: number }
     ) => {
       const startTime = performance.now();
       const targetX = wrap.clientWidth / 2;
@@ -136,7 +139,7 @@ const ProfileCardComponent = ({
   }, [enableTilt]);
 
   const handlePointerMove = useCallback(
-    (event: { clientX: number; clientY: number; }) => {
+    (event: { clientX: number; clientY: number }) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
 
@@ -165,7 +168,7 @@ const ProfileCardComponent = ({
   }, [animationHandlers]);
 
   const handlePointerLeave = useCallback(
-    (event: { offsetX: any; offsetY: any; }) => {
+    (event: { offsetX: any; offsetY: any }) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
 
@@ -185,7 +188,7 @@ const ProfileCardComponent = ({
   );
 
   const handleDeviceOrientation = useCallback(
-    (event: { beta: any; gamma: any; }) => {
+    (event: { beta: any; gamma: any }) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
 
@@ -196,7 +199,8 @@ const ProfileCardComponent = ({
 
       animationHandlers.updateCardTransform(
         card.clientHeight / 2 + gamma * mobileTiltSensitivity,
-        card.clientWidth / 2 + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity,
+        card.clientWidth / 2 +
+          (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity,
         card,
         wrap
       );
@@ -218,18 +222,20 @@ const ProfileCardComponent = ({
     const deviceOrientationHandler = handleDeviceOrientation;
 
     const handleClick = () => {
-      if (!enableMobileTilt || location.protocol !== 'https:') return;
-      if (typeof window.DeviceMotionEvent.requestPermission === 'function') {
-        window.DeviceMotionEvent
-          .requestPermission()
+      if (!enableMobileTilt || location.protocol !== "https:") return;
+      if (typeof window.DeviceMotionEvent.requestPermission === "function") {
+        window.DeviceMotionEvent.requestPermission()
           .then((state: string) => {
-            if (state === 'granted') {
-              window.addEventListener('deviceorientation', deviceOrientationHandler);
+            if (state === "granted") {
+              window.addEventListener(
+                "deviceorientation",
+                deviceOrientationHandler
+              );
             }
           })
           .catch((err: any) => console.error(err));
       } else {
-        window.addEventListener('deviceorientation', deviceOrientationHandler);
+        window.addEventListener("deviceorientation", deviceOrientationHandler);
       }
     };
 
@@ -255,7 +261,7 @@ const ProfileCardComponent = ({
       card.removeEventListener("pointermove", pointerMoveHandler);
       card.removeEventListener("pointerleave", pointerLeaveHandler);
       card.removeEventListener("click", handleClick);
-      window.removeEventListener('deviceorientation', deviceOrientationHandler);
+      window.removeEventListener("deviceorientation", deviceOrientationHandler);
       animationHandlers.cancelAnimation();
     };
   }, [
@@ -269,12 +275,11 @@ const ProfileCardComponent = ({
   ]);
 
   const cardStyle = useMemo(
-    () =>
-    ({
+    () => ({
       "--icon": iconUrl ? `url(${iconUrl})` : "none",
       "--grain": grainUrl ? `url(${grainUrl})` : "none",
       "--behind-gradient": showBehindGradient
-        ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT)
+        ? behindGradient ?? DEFAULT_BEHIND_GRADIENT
         : "none",
       "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
     }),
@@ -322,7 +327,8 @@ const ProfileCardComponent = ({
                     <div className="pc-status">{status}</div>
                   </div>
                 </div>
-                <button
+                <a
+                  href="#contact"
                   className="pc-contact-btn"
                   onClick={handleContactClick}
                   style={{ pointerEvents: "auto" }}
@@ -330,7 +336,7 @@ const ProfileCardComponent = ({
                   aria-label={`Contact ${name || "user"}`}
                 >
                   {contactText}
-                </button>
+                </a>
               </div>
             )}
           </div>

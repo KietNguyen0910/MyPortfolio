@@ -29,9 +29,9 @@ const Banner: React.FC = () => {
           />
         </div>
         <div className="container">
-          <div className="flex max-sm:flex-col max-sm:gap-4">
+          <div className="flex max-sm:flex-col max-sm:gap-20">
             <div className="flex flex-col gap-3 w-[45%] max-sm:w-full">
-              <div className="text-white">
+              <div className="">
                 <h1 className="text-5xl font-bold uppercase max-sm:text-4xl">
                   Hi, i'm Vu Kiet <br /> creative
                 </h1>

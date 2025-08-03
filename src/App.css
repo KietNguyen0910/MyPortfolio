@@ -36,14 +36,17 @@ main {
 .sec-pd {
   padding: 6rem 0;
 }
+@media screen and (max-width: 768px) {
+  .sec-pd {
+    padding: 4rem 0;
+  }
+}
 
 .hd {
   color: #fff;
   position: sticky;
   top: 0;
   backdrop-filter: blur(5px);
-}
-.hd-inner {
 }
 
 .menu-list {
