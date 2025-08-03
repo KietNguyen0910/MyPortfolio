@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import FlyBird from "./FlyBird";
-import Silk from "./Silk";
 import TextType from "./TextType";
 
 export function LoadingScreenEffect() {
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(true);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -13,16 +12,16 @@ export function LoadingScreenEffect() {
       setHidden(true);
     }, 3000);
 
-    const timeout = setTimeout(() => {
-      setShow(false);
-    }, 5000);
+    // const timeout = setTimeout(() => {
+    //   setShow(false);
+    // }, 5000);
 
     const elements = document.querySelectorAll(".add-active");
     elements.forEach((el) => el.classList.add("active"));
 
     return () => {
       clearTimeout(hiddenTimeout);
-      clearTimeout(timeout);
+      // clearTimeout(timeout);
       elements.forEach((el) => el.classList.remove("active"));
     };
   }, []);
@@ -72,13 +71,13 @@ export function LoadingScreenEffect() {
         id="loading-screen-3"
       >
         <FlyBird colorBird={"primary"} classCustom={"z-[999]"} />
-        <Silk
+        {/* <Silk
           speed={6}
           scale={1}
           color="#7B7481"
           noiseIntensity={1.5}
           rotation={0}
-        />
+        /> */}
       </div>
 
       <div className={`l-logo relative z-10  ${hidden ? "fade-out-bck" : ""}`}>

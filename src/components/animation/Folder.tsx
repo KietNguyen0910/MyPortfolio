@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 
-const darkenColor = (hex, percent) => {
+const darkenColor = (hex: string, percent: number) => {
   let color = hex.startsWith("#") ? hex.slice(1) : hex;
   if (color.length === 3) {
     color = color
@@ -21,12 +21,19 @@ const darkenColor = (hex, percent) => {
   );
 };
 
+interface FolderProps {
+  color?: string;
+  size?: number;
+  items?: (string | null)[];
+  className?: string;
+}
+
 const Folder = ({
   color = "#5227FF",
   size = 1,
   items = [],
   className = "",
-}) => {
+}: FolderProps) => {
   const maxItems = 3;
   const papers = items.slice(0, maxItems);
   while (papers.length < maxItems) {
@@ -43,7 +50,7 @@ const Folder = ({
   const paper2 = darkenColor("#ffffff", 0.05);
   const paper3 = "#ffffff";
 
-  const handlePaperMouseMove = (e, index) => {
+  const handlePaperMouseMove = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, index: number) => {
     if (!open) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -57,7 +64,7 @@ const Folder = ({
     });
   };
 
-  const handlePaperMouseLeave = (e, index) => {
+  const handlePaperMouseLeave = (_e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, index: number) => {
     setPaperOffsets((prev) => {
       const newOffsets = [...prev];
       newOffsets[index] = { x: 0, y: 0 };
@@ -80,7 +87,7 @@ const Folder = ({
     <div style={scaleStyle} className={className}>
       <div
         className={`${folderClassName} flex gap-3 items-center hover:text-[#55e6a5]`}
-        style={folderStyle}
+        style={folderStyle as React.CSSProperties}
         onClick={() => {
           const link = document.createElement("a");
           link.href = "/NguyenVuKiet_FrontEnd.pdf";
@@ -99,11 +106,11 @@ const Folder = ({
               onMouseLeave={(e) => handlePaperMouseLeave(e, i)}
               style={
                 open
-                  ? {
+                  ? ({
                       "--magnet-x": `${paperOffsets[i]?.x || 0}px`,
                       "--magnet-y": `${paperOffsets[i]?.y || 0}px`,
-                    }
-                  : {}
+                    } as React.CSSProperties)
+                  : ({} as React.CSSProperties)
               }
             >
               {item}

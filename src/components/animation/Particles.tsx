@@ -3,7 +3,7 @@ import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
 
 const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
 
-const hexToRgb = (hex) => {
+const hexToRgb = (hex: string) => {
   hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
     hex = hex.split("").map((c) => c + c).join("");
@@ -103,7 +103,7 @@ const Particles: React.FC<ParticlesProps> = ({
   disableRotation = false,
   className,
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const Particles: React.FC<ParticlesProps> = ({
     window.addEventListener("resize", resize, false);
     resize();
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: { clientX: number; clientY: number; }) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
@@ -181,11 +181,11 @@ const Particles: React.FC<ParticlesProps> = ({
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
-    let animationFrameId;
+    let animationFrameId: number;
     let lastTime = performance.now();
     let elapsed = 0;
 
-    const update = (t) => {
+    const update = (t: number) => {
       animationFrameId = requestAnimationFrame(update);
       const delta = t - lastTime;
       lastTime = t;
