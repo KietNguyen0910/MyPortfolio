@@ -68,32 +68,74 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
         {/* Menu Content */}
         <div className="flex-1 overflow-auto">
           <div className="px-4 py-6">
+            <img
+              className="w-10 h-10 p-2 mb-3 ml-auto filter invert brightness-0"
+              src={"/close.png"}
+              alt={`close`}
+              loading="lazy"
+              onClick={onClose}
+            />
             <AnimatePresence>
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              {data.map((item: { name: React.Key | null | undefined; id: boolean | React.Key | null | undefined; label: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: unknown) => (
-                <motion.div
-                  key={item.name}
-                  variants={listItemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={index}
-                  className="mb-2"
-                >
-                  <a
-                    key={String(item.id)}
-                    href={`#${item.id}`}
-                    onClick={onClose}
-                    className={clsx(
-                      "menu-item relative px-[1rem] rounded-lg z-[1] py-[0.5rem] flex text-lg uppercase transition-colors",
-                      activeId === item.id
-                        ? "bg-[#55e6a5] !text-black"
-                        : "!text-white"
-                    )}
+              {data.map(
+                (
+                  item: {
+                    name: React.Key | null | undefined;
+                    id: boolean | React.Key | null | undefined;
+                    label:
+                      | string
+                      | number
+                      | bigint
+                      | boolean
+                      | React.ReactElement<
+                          unknown,
+                          string | React.JSXElementConstructor<any>
+                        >
+                      | Iterable<React.ReactNode>
+                      | React.ReactPortal
+                      | Promise<
+                          | string
+                          | number
+                          | bigint
+                          | boolean
+                          | React.ReactPortal
+                          | React.ReactElement<
+                              unknown,
+                              string | React.JSXElementConstructor<any>
+                            >
+                          | Iterable<React.ReactNode>
+                          | null
+                          | undefined
+                        >
+                      | null
+                      | undefined;
+                  },
+                  index: unknown
+                ) => (
+                  <motion.div
+                    key={item.name}
+                    variants={listItemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    custom={index}
+                    className="mb-2"
                   >
-                    {item.label}
-                  </a>
-                </motion.div>
-              ))}
+                    <a
+                      key={String(item.id)}
+                      href={`#${item.id}`}
+                      onClick={onClose}
+                      className={clsx(
+                        "menu-item relative px-[1rem] rounded-lg z-[1] py-[0.5rem] flex text-lg uppercase transition-colors",
+                        activeId === item.id
+                          ? "bg-[#55e6a5] !text-black"
+                          : "!text-white"
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  </motion.div>
+                )
+              )}
             </AnimatePresence>
           </div>
         </div>

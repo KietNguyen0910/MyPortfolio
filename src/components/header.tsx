@@ -64,8 +64,8 @@ const Header: React.FC = () => {
         <div className="container px-4 mx-auto">
           <div className="hd-inner py-[.8rem] flex items-center justify-between">
             <div className="flex items-center">
-              <span className="fw-7 text-[2rem] text-[#55e6a5] mr-2">V</span>
-              <span className="fw-7 text-white text-[1.2rem]">VUKIET</span>
+              <span className="fw-7 text-[2rem] text-[#55e6a5] mr-2 leading-none">V</span>
+              <span className="fw-7 text-white text-[1.2rem] leading-none">VUKIET</span>
             </div>
 
             <div

@@ -902,7 +902,7 @@ body {
 
 #nav-icon3 {
   width: 35px;
-  height: 30px;
+  height: 27px;
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -917,7 +917,7 @@ body {
 #nav-icon3 span {
   display: block;
   position: absolute;
-  height: 4px;
+  height: 3px;
   width: 100%;
   background: var(--c-pri);
   border-radius: 9px;
