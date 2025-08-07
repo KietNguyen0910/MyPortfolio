@@ -75,6 +75,7 @@ const Projects: React.FC = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    speed: 2000,
     cssEase: "linear",
     swipeToSlide: true,
     pauseOnHover: true,

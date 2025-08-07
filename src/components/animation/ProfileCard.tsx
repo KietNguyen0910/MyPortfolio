@@ -341,7 +341,7 @@ const ProfileCardComponent = ({
             )}
           </div>
           <div className="pc-content">
-            <div className="pc-details">
+            <div className="gap-2 pc-details">
               <h3>{name}</h3>
               <p>{title}</p>
             </div>
