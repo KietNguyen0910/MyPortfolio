@@ -377,3 +377,23 @@ main {
 .slick-list {
   margin-bottom: 1rem !important ;
 }
+.swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+.swiper-pagination {
+  position: relative !important;
+  display: flex;
+  inset: 0 !important;
+  justify-content: center !important;
+  margin-top: 1rem !important;
+  align-items: center;
+}
+.swiper-pagination-bullet {
+  transition: 0.3s ease !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  border-radius: 0.4rem !important;
+}
+.swiper-pagination-bullet-active {
+  width: 3rem !important;
+  background: var(--c-pri) !important;
+}

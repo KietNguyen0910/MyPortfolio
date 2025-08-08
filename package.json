@@ -29,6 +29,7 @@
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "split-type": "^0.3.4",
+    "swiper": "^11.2.10",
     "three": "^0.178.0"
   },
   "devDependencies": {

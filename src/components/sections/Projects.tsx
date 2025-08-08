@@ -3,10 +3,17 @@ import React, { useRef } from "react";
 import { TitleCustom } from "../animation/TitleCustom";
 import { motion } from "framer-motion";
 import SplashCursor from "../animation/SplashCursor";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import AnimatedBorderButton from "../common/Button";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+//@ts-expect-error/ignote-type-swiper
+import "swiper/css";
+//@ts-expect-error/ignote-type-swiper
+import "swiper/css/pagination";
 
 const data = [
   {
@@ -67,35 +74,35 @@ const data = [
 
 const Projects: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const settings = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 2000,
-    cssEase: "linear",
-    swipeToSlide: true,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 768, // dưới 768px (mobile/tablet)
-        settings: {
-          slidesToShow: 2, // 👉 hiển thị 2 item
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480, // dưới 480px (mobile nhỏ)
-        settings: {
-          slidesToShow: 1, // 👉 chỉ 1 item cho screen nhỏ
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  // const settings = {
+  //   dots: true,
+  //   arrows: false,
+  //   infinite: true,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 2000,
+  //   speed: 2000,
+  //   cssEase: "linear",
+  //   swipeToSlide: true,
+  //   pauseOnHover: true,
+  //   responsive: [
+  //     {
+  //       breakpoint: 768, // dưới 768px (mobile/tablet)
+  //       settings: {
+  //         slidesToShow: 2, // 👉 hiển thị 2 item
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480, // dưới 480px (mobile nhỏ)
+  //       settings: {
+  //         slidesToShow: 1, // 👉 chỉ 1 item cho screen nhỏ
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
 
   return (
     <section
@@ -127,6 +134,7 @@ const Projects: React.FC = () => {
             frontend performance.
           </motion.div>
         </div>
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,13 +146,45 @@ const Projects: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="flex flex-col mt-4"
         >
-          <Slider {...settings}>
+          {/* <Slider {...settings}>
             {data?.map((item, index) => (
               <div className="px-2" key={index}>
                 <ProItem item={item} />
               </div>
             ))}
-          </Slider>
+          </Slider> */}
+          <div className="w-full">
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              slidesPerView={3}
+              spaceBetween={16} // tương đương với px-2 của bạn
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              speed={8000}
+              loop={true}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                480: {
+                  slidesPerView: 2,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {data?.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <ProItem item={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </motion.div>
       </div>
     </section>
