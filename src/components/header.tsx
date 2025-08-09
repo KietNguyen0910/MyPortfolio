@@ -21,6 +21,7 @@ const Header: React.FC = () => {
 
   // Scroll Spy
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
           }
         }
       },
-      { threshold: 0.6 }
+      { threshold: isMobile ? 0.3 : 0.4 }
     );
 
     const targets = document.querySelectorAll("section[id]");
@@ -60,12 +61,16 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 hd">
+      <header className="fixed top-0 left-0 z-50 w-full hd">
         <div className="container px-4 mx-auto">
           <div className="hd-inner py-[.8rem] flex items-center justify-between">
             <div className="flex items-center">
-              <span className="fw-7 text-[2rem] text-[#55e6a5] mr-2 leading-none">V</span>
-              <span className="fw-7 text-white text-[1.2rem] leading-none">VUKIET</span>
+              <span className="fw-7 text-[2rem] text-[#55e6a5] mr-2 leading-none">
+                V
+              </span>
+              <span className="fw-7 text-white text-[1.2rem] leading-none">
+                VUKIET
+              </span>
             </div>
 
             <div

@@ -13,7 +13,7 @@ const Banner: React.FC = () => {
   return (
     <>
       <section
-        className="relative overflow-hidden banner sec-pd z-[1] bg-[#121212]"
+        className="relative overflow-hidden banner sec-pd md:!pt-[10rem] !pt-[6rem] z-[1] bg-[#121212]"
         id="banner"
       >
         <div className="absolute inset-[0] ">

@@ -44,8 +44,6 @@ main {
 
 .hd {
   color: #fff;
-  position: sticky;
-  top: 0;
   backdrop-filter: blur(5px);
 }
 

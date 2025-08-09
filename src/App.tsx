@@ -1,5 +1,6 @@
 import "./App.css";
 import BlobCursor from "./components/animation/BlobCusor";
+// import SmoothScroll from "./components/common/SmoothScroll";
 import Header from "./components/header";
 import About from "./components/sections/About";
 import Banner from "./components/sections/Banner";
@@ -15,16 +16,15 @@ function App() {
     <>
       {/* <LoadingScreenEffect /> */}
       <Header />
-
-      <main className="relative">
-        <div className="">
+      {/* <SmoothScroll> */}
+        <main className="relative">
           <Banner />
           <About />
           <Projects />
           <Skill />
           <Contact />
-        </div>
-      </main>
+        </main>
+      {/* </SmoothScroll> */}
       {!isMobile && (
         <BlobCursor
           blobType="circle"
