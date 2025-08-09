@@ -16,7 +16,7 @@ const link_social = [
   },
   {
     img: "tel.png",
-    link: "https://www.facebook.com/KietNgyn/",
+    link: "https://t.me/VuKiee",
   },
 ];
 
@@ -57,6 +57,7 @@ const Contact: React.FC = () => {
                       innerClassName=""
                     >
                       <a
+                        target="_blank"
                         href={item?.link}
                         className="flex items-center justify-center w-10 group duration-300 hover:bg-white h-10 p-3 border border-[rgba(255,255,255,0.2)] border-solid rounded-full"
                       >
