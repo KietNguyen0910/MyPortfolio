@@ -1,27 +1,28 @@
-"use client";
+// components/common/SmoothScroll.ts
 import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollSmoother, ScrollTrigger } from "gsap/all";
+import Lenis from "@studio-freight/lenis";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+export function useSmoothScroll() {
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: 1.5, // tốc độ mượt
-        effects: true,
-      });
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+      smoothWheel: true,
     });
 
-    return () => ctx.revert();
-  }, []);
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
 
-  return (
-    <div id="smooth-wrapper">
-      <div id="smooth-content">{children}</div>
-    </div>
-  );
+    // debug để chắc chắn vẫn scroll được
+    lenis.on("scroll", () => {
+      // console.log({ scroll, limit });
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 }
