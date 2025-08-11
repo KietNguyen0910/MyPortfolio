@@ -20,7 +20,7 @@ const data = [
     img: "/pro1.png",
     title: "yen dao can gio",
     desc: "Thương hiệu yến sào nguyên chất, được khai thác tại huyện đảo Cần Giờ và sơ chế theo tiêu chuẩn an toàn thực phẩm. Tự hào đảm bảo chất lượng và hương vị tinh hoa từ tổ yến Việt. ",
-    link: "https://yendaocangio.monaweb.dev/",
+    link: "#",
   },
   {
     img: "/pro2.png",
@@ -50,7 +50,7 @@ const data = [
     img: "/pro6.png",
     title: "Boc academy",
     desc: "Học viện diễn họa kiến trúc trực thuộc BOC Studio, đào tạo chuyên nghiệp software như 3ds Max, Revit & V‑Ray từ năm 2011.",
-    link: "https://boc.mona.academy/learn",
+    link: "#",
   },
   {
     img: "/pro7.png",
