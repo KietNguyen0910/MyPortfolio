@@ -316,7 +316,6 @@ main {
 }
 
 .no-scroll {
-  pointer-events: none;
   overflow: hidden;
 }
 
@@ -396,7 +395,8 @@ main {
   background: var(--c-pri) !important;
 }
 
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -414,4 +414,165 @@ html.lenis, html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+.squares-canvas {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s ease forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s ease forwards;
+}
+
+.btn-style900 {
+  position: relative;
+  border-color: rgb(52, 204, 218);
+  color: white;
+  transition-delay: 0.3s;
+  overflow: hidden;
+}
+
+.btn-style900:hover {
+  transform: translateY(-0.3em);
+  border-color: rgb(52, 204, 218);
+  color: rgba(221, 99, 149, 0);
+  transition-delay: 0s;
+  box-shadow: rgba(255, 255, 255, 0.55) 0px 2px 15px;
+}
+
+.btn-style900::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  opacity: 0;
+  content: attr(data-hover);
+  color: white;
+  text-align: center;
+  transform: translate(-60%, -50%);
+  transition: all 0.4s;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-style900:hover::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+  transition-delay: 0.15s;
+}
+
+.spline-container > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.spline-container > div canvas {
+  padding-right: 30vw;
+  padding-top: 10vh;
+}
+
+@media screen and (max-width: 768px) {
+  .container-mobile {
+    flex-direction: column-reverse;
+    height: 100vh;
+  }
+  .spline-container  {
+    display: flex;
+    height: 60vh;
+  }
+  .spline-container > div {
+    position: relative;
+  }
+  .spline-container > div canvas {
+    padding-right: 0;
+    padding-top: 0;
+  }
+}
+
+/* Warp speed effect: starfield zoom */
+.star-warp {
+  animation: starWarp 3s forwards ease-in;
+}
+
+@keyframes starWarp {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(7);
+  }
+}
+
+/* Robot zoom in to camera */
+.robot-zoom {
+  animation: robotZoom 1.5s both ease-in;
+}
+
+@keyframes robotZoom {
+  from {
+    /* transform: scale(1); */
+    opacity: 1;
+  }
+  to {
+    /* transform: scale(2); */
+    opacity: 0;
+  }
+}
+
+/* Fade out screen */
+.fade-out {
+  animation: fadeOutOpacity 0.8s forwards ease-in;
+  animation-delay: 1.2s;
+}
+
+@keyframes fadeOutOpacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.ex-line-inner {
+  background: linear-gradient(
+    to bottom,
+    #93c5fd, /* from-blue-300 */
+    #2362c9, /* via-blue-500 */
+    #d829eb  /* to-blue-900 */
+  );
 }

@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TitleCustom } from "../animation/TitleCustom";
 import Aurora from "../animation/Aurora";
 import { motion } from "framer-motion";
+// import Squares from "../animation/Squares ";
 
 const data = [
   {
@@ -46,7 +47,16 @@ const data = [
 const Skill: React.FC = () => {
   return (
     <section className="relative overflow-hidden skill sec-pd" id="skill">
-      <div className="container">
+      <div className="absolute inset-0 z-[1]">
+        {/* <Squares
+          speed={0.1}
+          squareSize={40}
+          direction="diagonal" // up, down, left, right, diagonal
+          borderColor="#fff"
+          hoverFillColor="#222"
+        /> */}
+      </div>
+      <div className="container relative z-[2]">
         <div className="flex flex-col items-center justify-center">
           <TitleCustom className="text-primary" textCenter="center">
             Skill
@@ -94,19 +104,42 @@ type Props = {
   item?: any;
 };
 const SkillItem = ({ item }: Props) => {
+  const [isHovered, setIsHovered] = useState(false);
+    const [showAurora, setShowAurora] = useState(false);
+
+  useEffect(() => {
+    if (isHovered) {
+      setShowAurora(true); // mount ngay khi hover
+    } else {
+      // delay unmount sau khi fade-out
+      const timer = setTimeout(() => setShowAurora(false), 400); // match fade-out duration
+      return () => clearTimeout(timer);
+    }
+  }, [isHovered]);
   return (
-    <div className="relative border border-[rgba(255,255,255,0.1)] border-solid group">
+    <div
+      className="relative border border-[rgba(255,255,255,0.1)] border-solid group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative flex flex-col p-4 overflow-hidden">
-        <div className="absolute inset-0 w-[120%] duration-300 opacity-20 group-hover:opacity-100 translate-y-[-100%] group-hover:translate-y-[0]">
-          <Aurora
-            colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-            blend={0.5}
-            amplitude={1.0}
-            speed={0.5}
-          />
-        </div>
+       {showAurora && (
+          <div
+            className={`absolute inset-0 w-[120%] opacity-20 
+              ${isHovered ? "animate-slideDown" : "animate-slideUp"}`}
+          >
+            <Aurora
+              colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+              blend={0.5}
+              amplitude={1.0}
+              speed={0.5}
+            />
+          </div>
+        )}
         <div className="flex flex-col items-center gap-2 max-md:px-3 max-md:py-3 max-sm:px-0 px-10 py-6 rounded-2xl backdrop-blur-2xl z-[5]">
-          <p className="text-2xl font-semibold text-center max-sm:text-lg">{item?.title}</p>
+          <p className="text-2xl font-semibold text-center max-sm:text-lg">
+            {item?.title}
+          </p>
           <img
             className="object-contain h-10 max-sm:h-6 filter invert brightness-0"
             src={item?.img}

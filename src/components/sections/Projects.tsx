@@ -159,6 +159,7 @@ const Projects: React.FC = () => {
               slidesPerView={3}
               spaceBetween={16} // tương đương với px-2 của bạn
               pagination={{ clickable: true }}
+              grabCursor={true}
               autoplay={{
                 delay: 0,
                 disableOnInteraction: false,

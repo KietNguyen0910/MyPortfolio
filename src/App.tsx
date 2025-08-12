@@ -1,4 +1,5 @@
 import "./App.css";
+import { LoadingScreenEffect } from "./components/animation/LoadingScreen";
 // import BlobCursor from "./components/animation/BlobCusor";
 // import { useSmoothScroll } from "./components/common/SmoothScroll";
 import Header from "./components/header";
@@ -10,11 +11,10 @@ import Skill from "./components/sections/Skill";
 // import { useWindowSize } from "./hooks/use-window-size";
 
 function App() {
-  // const { isMobile } = useWindowSize();
 //  useSmoothScroll(); 
   return (
     <>
-      {/* <LoadingScreenEffect /> */}
+      <LoadingScreenEffect />
       <Header />
       {/* <SmoothScroll> */}
         <main className="relative">
