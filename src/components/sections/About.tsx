@@ -8,6 +8,34 @@ import SpotlightCard from "../animation/SpotlightCard";
 import CountUp from "../animation/CountUp";
 import LightRays from "../animation/LightRays";
 
+const fakeData = [
+  {
+    title: "UI/UX Design",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+  },
+  {
+    title: "Coding & Innovation",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+  },
+  {
+    title: "Web Applications",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+  },
+  {
+    title: "Creative Solutions",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
+  },
+  {
+    title: "Frontend Development",
+    image:
+      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=800&q=80",
+  },
+];
+
 const About: React.FC = () => {
   const cards = [
     {
@@ -33,6 +61,9 @@ const About: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex] = useState<number>(fakeData.length - 1);
 
   useEffect(() => {
     if (ref.current) {
@@ -139,55 +170,93 @@ const About: React.FC = () => {
         </div>
         <div className="container">
           <div className="w-full mt-8" ref={containerRef}>
-            <h3 className="mb-6 text-2xl font-semibold uppercase">Experience</h3>
+            <h3 className="mb-6 text-2xl font-semibold uppercase">
+              Experience
+            </h3>
 
-            <div ref={ref} className="relative pb-20 mx-auto max-w-7xl">
-              <div className="relative z-[1] flex items-start gap-8 pb-16">
-                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot">
+            <div ref={ref} className="relative pb-20 mx-auto max-sm:pb-10 max-w-7xl">
+              <div className="relative z-[1] flex items-start gap-4 md:gap-8 pb-16">
+                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot max-md:text-xl max-sm:flex-col max-sm:-translate-x-[.8rem]">
                   <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
                     <div className="w-full h-full bg-white rounded-full"></div>
                   </div>
-                  <span>Present</span>
+                  <span>2023</span>
                 </div>
                 <div className="">
-                  <h3 className="text-lg font-semibold">MONA Media</h3>
-                  <p className="italic">
-                    Frontend Developer / Aug 2023 – Present
-                  </p>
-                  <ul className="pl-3 mt-4 space-y-1 text-sm list-disc list-outside">
-                    <li>
-                      Lead frontend for 2 e-commerce platforms (Petdays & Phong
-                      thuy thien an), handling architecture & UI/UX.
-                    </li>
-                    <li>
-                      Built SEO-optimized UIs with Next.js (App Router,
-                      SSR/SSG), React & Tailwind CSS.
-                    </li>
-                    <li>
-                      Integrated GraphQL (CMS) & REST APIs, implemented full
-                      VNPAY payment flow.
-                    </li>
-                    <li>
-                      Managed state with Zustand & React Query — optimized
-                      caching & background syncing.
-                    </li>
-                    <li>
-                      Enhanced performance with code splitting, lazy loading,
-                      and image optimization.
-                    </li>
-                    <li>
-                      Created smooth UX with GSAP, Animista — responsive across
-                      99%+ devices.
-                    </li>
-                    <li>
-                      Worked closely with design/backend for clean,
-                      production-ready UI.
-                    </li>
-                  </ul>
+                  <div className="">
+                    <h3 className="text-lg font-semibold">MONA Media</h3>
+                    <p className="italic">
+                      Frontend Developer / Aug 2023 – Present
+                    </p>
+                  </div>
+                  <div className="flex max-lg:flex-col max-lg:gap-[2rem]">
+                    <ul className="flex-1 flex-shrink-0 pl-3 mt-4 space-y-1 text-sm list-disc list-outside md:pr-[5%]">
+                      <li>
+                        Lead frontend for 2 e-commerce platforms (Petdays &
+                        Phong thuy thien an), handling architecture & UI/UX.
+                      </li>
+                      <li>
+                        Built SEO-optimized UIs with Next.js (App Router,
+                        SSR/SSG), React & Tailwind CSS.
+                      </li>
+                      <li>
+                        Integrated GraphQL (CMS) & REST APIs, implemented full
+                        VNPAY payment flow.
+                      </li>
+                      <li>
+                        Managed state with Zustand & React Query — optimized
+                        caching & background syncing.
+                      </li>
+                      <li>
+                        Enhanced performance with code splitting, lazy loading,
+                        and image optimization.
+                      </li>
+                      <li>
+                        Created smooth UX with GSAP, Animista — responsive
+                        across 99%+ devices.
+                      </li>
+                      <li>
+                        Worked closely with design/backend for clean,
+                        production-ready UI.
+                      </li>
+                    </ul>
+                    <div className="relative max-lg:w-full w-1/2 max-sm:pl-[0.5rem] rounded-[8px]">
+                      <div className="flex slide-img-cus">
+                        {fakeData.map((slide, slideIdx) => {
+                          const isHovered = hoveredIndex === slideIdx;
+                          const isDefault =
+                            hoveredIndex === null && activeIndex === slideIdx;
+                          const isActive = isHovered || isDefault;
+
+                          return (
+                            <div
+                              key={slideIdx}
+                              className={`slide-img-cus-item flex-shrink-0 rounded-[1rem] max-sm:h-[15rem] max-md:h-[20rem] h-[30rem] overflow-hidden relative group cursor-pointer ${
+                                isActive ? "active" : ""
+                              } ${slideIdx === 0 || slideIdx === 1 ? "max-sm:hidden" : ""}`}
+                              onMouseEnter={() => setHoveredIndex(slideIdx)}
+                              onMouseLeave={() => setHoveredIndex(null)}
+                            >
+                              <img
+                                src={slide.image}
+                                alt={slide.title}
+                                className="object-cover w-full h-full transition-all duration-300 grayscale group-hover:grayscale-0"
+                              />
+                              <div className="txt duration-300 ease-linear opacity-0 absolute bottom-0 left-0 w-full p-[2rem] text-white text-sm font-bold text-center uppercase">
+                                <span className="duration-300 ease-linear ">
+                                  {slide.title}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="relative z-[1] flex items-start gap-8 pb-8">
-                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot">
+              <div className="relative z-[1] flex items-start gap-4 md:gap-8 pb-8">
+                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot max-md:text-xl max-sm:flex-col max-sm:-translate-x-[1.4rem]">
                   <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
                     <div className="w-full h-full bg-white rounded-full"></div>
                   </div>
@@ -233,102 +302,6 @@ const About: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* <div className="mt-8">
-            <h3 className="mb-6 text-xl font-semibold uppercase">Experience</h3>
-            <div
-              ref={containerRef}
-              className="relative flex flex-col justify-between"
-            >
-              <div
-                ref={lineRef}
-                className="absolute top-3 left-[0.7rem] w-0.5 bg-white/20"
-                style={{ height: "100%" }}
-              >
-                <motion.div
-                  className="absolute left-0 w-0.5 bg-gradient-to-b from-blue-300 via-blue-500 to-blue-700"
-                  style={{
-                    height: heightTransform,
-                    opacity: opacityTransform,
-                  }}
-                />
-              </div>
-              <div className="relative flex items-start gap-8 pb-16">
-                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot">
-                  <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
-                    <div className="w-full h-full bg-white rounded-full"></div>
-                  </div>
-                  <span>Present</span>
-                </div>
-                <div className="">
-                  <h3 className="text-lg font-semibold">MONA Media</h3>
-                  <p className="italic">
-                    Frontend Developer / Aug 2023 – Present
-                  </p>
-                  <ul className="pl-3 mt-4 space-y-1 text-sm list-disc list-outside">
-                    <li>
-                      Lead frontend for 2 e-commerce platforms (Petdays & Phong
-                      thuy thien an), handling architecture & UI/UX.
-                    </li>
-                    <li>
-                      Built SEO-optimized UIs with Next.js (App Router,
-                      SSR/SSG), React & Tailwind CSS.
-                    </li>
-                    <li>
-                      Integrated GraphQL (CMS) & REST APIs, implemented full
-                      VNPAY payment flow.
-                    </li>
-                    <li>
-                      Managed state with Zustand & React Query — optimized
-                      caching & background syncing.
-                    </li>
-                    <li>
-                      Enhanced performance with code splitting, lazy loading,
-                      and image optimization.
-                    </li>
-                    <li>
-                      Created smooth UX with GSAP, Animista — responsive across
-                      99%+ devices.
-                    </li>
-                    <li>
-                      Worked closely with design/backend for clean,
-                      production-ready UI.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="relative flex items-start gap-8 pb-8">
-                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot">
-                  <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
-                    <div className="w-full h-full bg-white rounded-full"></div>
-                  </div>
-                  <span>2022</span>
-                </div>
-                <div className="">
-                  <h3 className="text-lg font-semibold">NAMTECH Solution</h3>
-                  <p className="italic">
-                    Frontend Developer / Aug 2022 – Aug 2023
-                  </p>
-                  <ul className="pl-3 mt-4 space-y-1 text-sm list-disc list-outside">
-                    <li>
-                      Delivered pixel-perfect UIs from Figma using HTML5, SCSS,
-                      and vanilla JS.
-                    </li>
-                    <li>
-                      Developed reusable WordPress blocks fetching dynamic
-                      content via PHP.
-                    </li>
-                    <li>
-                      Improved SEO with semantic HTML and clean markup
-                      structure.
-                    </li>
-                    <li>
-                      Used Git/GitLab for version control and CI/CD deployment.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </section>
     </>

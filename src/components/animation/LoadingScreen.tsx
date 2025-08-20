@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-// import FlyBird from "./FlyBird";
 import TextType from "./TextType";
 import Spline from "@splinetool/react-spline";
 import Galaxy from "./Galaxy";
@@ -52,7 +51,6 @@ export function LoadingScreenEffect() {
         <div
           className={`w-full spline-container ${hidden ? "robot-zoom" : ""}`}
         >
-          {/* <Spline scene="https://prod.spline.design/HC2y3aibuYREVVsY/scene.splinecode" /> */}
           <Spline scene="https://prod.spline.design/K2JCbEP3ODx8kyIf/scene.splinecode" />
         </div>
 

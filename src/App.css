@@ -509,7 +509,7 @@ html.lenis body {
     flex-direction: column-reverse;
     height: 100vh;
   }
-  .spline-container  {
+  .spline-container {
     display: flex;
     height: 60vh;
   }
@@ -571,8 +571,55 @@ html.lenis body {
 .ex-line-inner {
   background: linear-gradient(
     to bottom,
-    #93c5fd, /* from-blue-300 */
-    #2362c9, /* via-blue-500 */
-    #d829eb  /* to-blue-900 */
+    #93c5fd,
+    /* from-blue-300 */ #2362c9,
+    /* via-blue-500 */ #d829eb /* to-blue-900 */
   );
+}
+
+
+.slide-img-cus-item {
+  flex: 1;
+  transition: 0.4s ease;
+  box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.08),
+    0px 4px 24px 0px rgba(0, 0, 0, 0.12);
+}
+
+.slide-img-cus-item:not(:first-child) {
+  margin-left: -1.9rem;
+}
+
+.slide-img-cus-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s ease;
+  border-radius: 8px;
+}
+
+.slide-img-cus-item .txt {
+  background: linear-gradient(to top, #111 0%, rgba(17, 17, 17, 0) 100%);
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.slide-img-cus-item .txt .txt-inner {
+  transform: scale(0.5);
+  transition: transform 0.3s ease;
+}
+
+.slide-img-cus-item.active {
+  flex: 4;
+}
+
+.slide-img-cus-item.active img {
+  filter: unset;
+}
+
+.slide-img-cus-item.active .txt {
+  opacity: 1;
+}
+
+.slide-img-cus-item.active .txt .txt-inner {
+  transform: scale(1);
 }
