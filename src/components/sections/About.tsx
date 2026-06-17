@@ -7,6 +7,7 @@ import { TitleCustom } from "../animation/TitleCustom";
 import SpotlightCard from "../animation/SpotlightCard";
 import CountUp from "../animation/CountUp";
 import LightRays from "../animation/LightRays";
+import Spline from "@splinetool/react-spline";
 
 const fakeData = [
   {
@@ -174,7 +175,10 @@ const About: React.FC = () => {
               Experience
             </h3>
 
-            <div ref={ref} className="relative pb-20 mx-auto max-sm:pb-10 max-w-7xl">
+            <div
+              ref={ref}
+              className="relative pb-20 mx-auto max-md:pb-6 max-w-7xl"
+            >
               <div className="relative z-[1] flex items-start gap-4 md:gap-8 pb-16">
                 <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot max-md:text-xl max-sm:flex-col max-sm:-translate-x-[.8rem]">
                   <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
@@ -231,9 +235,13 @@ const About: React.FC = () => {
                           return (
                             <div
                               key={slideIdx}
-                              className={`slide-img-cus-item flex-shrink-0 rounded-[1rem] max-sm:h-[15rem] max-md:h-[20rem] h-[30rem] overflow-hidden relative group cursor-pointer ${
+                              className={`slide-img-cus-item flex-shrink-0 rounded-[1rem] max-sm:h-[15rem] max-md:h-[20rem] h-[25rem] overflow-hidden relative group cursor-pointer ${
                                 isActive ? "active" : ""
-                              } ${slideIdx === 0 || slideIdx === 1 ? "max-sm:hidden" : ""}`}
+                              } ${
+                                slideIdx === 0 || slideIdx === 1
+                                  ? "max-sm:hidden"
+                                  : ""
+                              }`}
                               onMouseEnter={() => setHoveredIndex(slideIdx)}
                               onMouseLeave={() => setHoveredIndex(null)}
                             >
@@ -255,35 +263,44 @@ const About: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="relative z-[1] flex items-start gap-4 md:gap-8 pb-8">
-                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 top-20 ex-dot max-md:text-xl max-sm:flex-col max-sm:-translate-x-[1.4rem]">
+              <div className="relative z-[1] flex items-start gap-4 md:gap-8 md:pb-8">
+                <div className="sticky flex items-center gap-2 text-2xl font-medium w-36 max-md:w-fit top-20 ex-dot max-md:text-xl max-sm:flex-col max-sm:-translate-x-[0.8rem]">
                   <div className="flex-shrink-0 w-6 h-6 p-1 border rounded-full border-white/800 ex-dot-inner">
                     <div className="w-full h-full bg-white rounded-full"></div>
                   </div>
                   <span>2022</span>
                 </div>
-                <div className="">
-                  <h3 className="text-lg font-semibold">NAMTECH Solution</h3>
-                  <p className="italic">
-                    Frontend Developer / Aug 2022 – Aug 2023
-                  </p>
-                  <ul className="pl-3 mt-4 space-y-1 text-sm list-disc list-outside">
-                    <li>
-                      Delivered pixel-perfect UIs from Figma using HTML5, SCSS,
-                      and vanilla JS.
-                    </li>
-                    <li>
-                      Developed reusable WordPress blocks fetching dynamic
-                      content via PHP.
-                    </li>
-                    <li>
-                      Improved SEO with semantic HTML and clean markup
-                      structure.
-                    </li>
-                    <li>
-                      Used Git/GitLab for version control and CI/CD deployment.
-                    </li>
-                  </ul>
+                <div className="w-full">
+                  <div className="">
+                    <h3 className="text-lg font-semibold">NAMTECH Solution</h3>
+                    <p className="italic">
+                      Frontend Developer / Aug 2022 – Aug 2023
+                    </p>
+                  </div>
+
+                  <div className="flex max-lg:flex-col max-lg:gap-[2rem]">
+                    <ul className="flex-1 flex-shrink-0 pl-3 mt-4 space-y-1 text-sm list-disc list-outside md:pr-[5%]">
+                      <li>
+                        Delivered pixel-perfect UIs from Figma using HTML5,
+                        SCSS, and vanilla JS.
+                      </li>
+                      <li>
+                        Developed reusable WordPress blocks fetching dynamic
+                        content via PHP.
+                      </li>
+                      <li>
+                        Improved SEO with semantic HTML and clean markup
+                        structure.
+                      </li>
+                      <li>
+                        Used Git/GitLab for version control and CI/CD
+                        deployment.
+                      </li>
+                    </ul>
+                    <div className="relative max-md:h-[20rem] max-lg:w-full w-1/2 max-sm:pl-[0.5rem]">
+                      <Spline scene="https://prod.spline.design/H0cX5LvJ9d6L1fWi/scene.splinecode" />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
